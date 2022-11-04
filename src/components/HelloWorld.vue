@@ -26,16 +26,42 @@
       <li><a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank" rel="noopener">vue-devtools</a></li>
       <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
       <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
+      <input type="text" v-model="this.mesaj">
+      <button @click="functieRandom">Create Object</button>
     </ul>
   </div>
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   name: 'HelloWorld',
+  data() {
+    return {
+      mesaj: ""
+    }
+  },
   props: {
     msg: String
+  },
+  methods: {
+    functieRandom() {
+      axios.post('http://192.168.233.142:8000/create-object', {nume: this.mesaj})
+      .then(res => console.log(res.data))
+      .catch(e => console.log(e))
+    } 
+  },
+  computed: {
+
+  },
+  watch: {
+    
+  },
+  created() {
+    axios.get('http://192.168.233.142:8000/tests', ).then(res => console.log(res.data))
   }
+  
 }
 </script>
 
